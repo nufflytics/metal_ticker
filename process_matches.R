@@ -83,7 +83,7 @@ new_uuids <- new_data$matches %>% map_chr("uuid")
 
 #replace data if newer matches available -----
 
-if(all(new_uuids != old_data$uuids)) {
+if(!all(new_uuids == old_data$uuids)) {
   
   new_ticker <- make_ticker(new_data$matches)
   
