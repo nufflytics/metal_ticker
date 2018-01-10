@@ -1,5 +1,6 @@
 library(htmltools)
 library(tidyverse)
+library(stringr)
 library(nufflytics)
 
 ## functions -----
