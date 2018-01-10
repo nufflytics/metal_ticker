@@ -77,7 +77,7 @@ load("data/key.rda")
 
 old_data <- readRDS("data/matches.rds")
 
-new_data <- api_matches(key, league = "Cabalvision Official League", competition = "Champion Ladder XI", limit = 4)
+new_data <- api_matches(key, league = "Cabalvision Official League", competition = "Champion Ladder XII", limit = 4)
 
 new_uuids <- new_data$matches %>% map_chr("uuid")
 
