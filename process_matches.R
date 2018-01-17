@@ -27,14 +27,17 @@ make_ticker <- function(match_data) {
 
 make_game_summary <- function(md) {
   
+  match_summary <- api_match(key, md$uuid)
+  
   match_table <- data.frame(
-    home = team_summary(md$teams[[1]], is_home = T),
+    home = team_summary(md$teams[[1]], match_summary$match$teams[[1]]$roster, is_home = T),
     separators = c(
       img(src="img/BigIconVS.png", height = 10) %>% as.character(),
-      img(src="img/REBBL_s.png", height = 25, class="separator") %>% as.character(),
-      img(src="img/Casualty.png", height=20, class="separator") %>% as.character()
+      img(src="img/GoldBall.png", height = 20, class="ball") %>% as.character(),
+      img(src="img/Casualty.png", height=20, class="separator") %>% as.character(),
+      "&nbsp;"
     ),
-    away = team_summary(md$teams[[2]], is_home = F)
+    away = team_summary(md$teams[[2]], match_summary$match$teams[[2]]$roster, is_home = F)
   )
   
   
@@ -47,7 +50,7 @@ make_game_summary <- function(md) {
   
 }
 
-team_summary <- function(team_data, is_home) {
+team_summary <- function(team_data, team_roster, is_home) {
   race = id_to_race(team_data$idraces) %>% str_replace_all(" ","")
   
   if(is_home) {
@@ -62,13 +65,21 @@ team_summary <- function(team_data, is_home) {
   
   if(team_data$sustaineddead > 0 ) {
     if(is_home) {
-      CAS <- paste0("(",team_data$sustaineddead," ",img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,") ",CAS)
+      CAS <- paste0("(",team_data$sustaineddead,img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,")    ",CAS)
     } else {
-      CAS <- paste0(CAS," (",img(src="img/Dead.png", height = 20, class = "separator") %>% as.character," ",team_data$sustaineddead,")")
+      CAS <- paste0(CAS,"    (",img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,team_data$sustaineddead,")")
     }
   }
   
-  c(name,TDs,CAS)
+  INJ <- team_roster %>% 
+    compact("casualties_state") %>% 
+    keep(~any(as.numeric(.$casualties_sustained_id)>9)) %>% 
+    map(~glue::glue_data(., "{star_player_name(name)}: {map_chr(casualties_sustained_id[casualties_sustained_id>9], ~id_to_casualty(.) %>% glue::collapse('/'))}")) %>% 
+    glue::collapse(", ")
+  
+  if(length(INJ)==0) INJ <- ""
+  
+  c(name,TDs,CAS, INJ)
 }
 
 #load data -----

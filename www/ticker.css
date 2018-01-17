@@ -15,38 +15,38 @@
 	  opacity: 100;
 	}
 	25%  {
-	  margin-top: -110px;
+	  margin-top: -148px;
 	  color: #fff;
 	  opacity: 100;
 	}
 	45%  {
-	  margin-top: -110px;
+	  margin-top: -148px;
 	  color: #fff;
 	  opacity: 100;
 	}
 	50%  {
-	  margin-top: -215px;
+	  margin-top: -286px;
 	  color: #fff;
 	  opacity: 100;
 	}
 	70%  {
-	  margin-top: -215px;
+	  margin-top: -286px;
 	  color: #fff;
 	  opacity: 100;
 	}
 	75%  {
-	  margin-top: -320px;
+	  margin-top: -424px;
 	  color: #fff;
 	  opacity: 100;
 	}
 	95%  {
-	  margin-top: -320px;
+	  margin-top: -424px;
 	  color: #fff;
 	  opacity: 100;
 
 	}
 	96%  {
-	  margin-top: -320px;
+	  margin-top: -424px;
 	  color: #000;
 	  opacity:0;
 	}
@@ -61,8 +61,8 @@ body { background: #0000; width: 100%; height: 100% }
 
 .news {
   width: 1200px;
-  height: 100px;
-  margin: 20px auto;
+  height: 130px;
+  /*margin: 20px auto;*/
   overflow: hidden;
   border-radius: 4px;
   padding: 3px;
@@ -84,7 +84,7 @@ body { background: #0000; width: 100%; height: 100% }
 
 .news ul {
   float: left;
-  padding-left: 20px;
+/*  padding-left: 20px; */
   animation: ticker 30s linear infinite;
   -webkit-user-select: none
 }
@@ -101,6 +101,11 @@ body { background: #0000; width: 100%; height: 100% }
 
 .separator {
   vertical-align: text-bottom;
+}
+
+.ball {
+  vertical-align: text-bottom;
+  transform: rotate(-30deg);
 }
 
 .table {
