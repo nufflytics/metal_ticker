@@ -65,9 +65,9 @@ team_summary <- function(team_data, team_roster, is_home) {
   
   if(team_data$sustaineddead > 0 ) {
     if(is_home) {
-      CAS <- paste0("(",team_data$sustaineddead,img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,")    ",CAS)
+      CAS <- paste0("(",team_data$sustaineddead,img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,")&nbsp;&nbsp;&nbsp;",CAS)
     } else {
-      CAS <- paste0(CAS,"    (",img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,team_data$sustaineddead,")")
+      CAS <- paste0(CAS,"&nbsp;&nbsp;&nbsp;(",img(src="img/Dead.png", height = 20, class = "separator") %>% as.character,team_data$sustaineddead,")")
     }
   }
   
