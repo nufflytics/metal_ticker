@@ -6,6 +6,8 @@ library(nufflytics)
 ## functions -----
 make_ticker <- function(match_data) {
   
+  if(is.null(match_data)) return(NULL)
+  
   div(class = "news",
       tags$ul(
         tags$li(
@@ -88,15 +90,17 @@ load("data/key.rda")
 
 old_data <- readRDS("data/matches.rds")
 
-new_data <- api_matches(key, league = "Cabalvision Official League", competition = "Champion Ladder XII", limit = 4)
+new_data <- api_matches(key, league = "REBBL Cripple Cup", limit = 4)
 
 new_uuids <- new_data$matches %>% map_chr("uuid")
 
 #replace data if newer matches available -----
 
-if(!all(new_uuids == old_data$uuids)) {
+if(!all(new_uuids == old_data$uuids) | length(new_uuids) == 0) {
   
   new_ticker <- make_ticker(new_data$matches)
+  
+  if(length(new_uuids) == 0) new_uuids <- c("","","","")
   
   to_save <- list(uuids = new_uuids, ticker = new_ticker)
   
